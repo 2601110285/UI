@@ -1,55 +1,32 @@
-# Prerequisites
-*.d
+# ==========================================
+# C# / .NET / Visual Studio 무시 파일
+# ==========================================
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
+# 1. 컴파일 및 빌드 결과물 (가장 중요 ⭐)
+[Bb]in/
+[Oo]bj/
 *.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
+*.dll
 *.pdb
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# 2. Visual Studio 작업 환경 및 숨김 폴더
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
 
-# debug information files
-*.dwo
+# 3. 테스트 결과 및 로그
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.log
+
+# 4. NuGet 패키지 (코드를 열면 알아서 다운로드되므로 제외)
+packages/
+*.nupkg
+
+# 5. 기타 임시 파일 및 백업
+*.cache
+*.tmp
+*.bak
+~$*
