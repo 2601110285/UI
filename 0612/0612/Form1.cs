@@ -48,42 +48,36 @@ namespace _0612
             isAutoMode = false;
         }
 
-        //private void button4_Click(object sender, EventArgs e)
-        //{
-        //    // 전진
-        //    short value = 0x01 << 2;        // Y01 (1 의미 2)
-        //    control.WriteDeviceBlock2("Y0", 1, ref value);
-        //}
-
-        //private void button5_Click(object sender, EventArgs e)
-        //{
-        //    // 후진
-        //    short value = 0x01 << 3;        // Y02 (2 의미 4)
-        //    control.WriteDeviceBlock2("Y0", 1, ref value);
-        //}
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             short sensor = 0;
             control.ReadDeviceBlock2("X0", 1, out sensor);
-
-            if (((int)(sensor) & 0x04) != 0)
-                label1.Text = "전진";
-
-            if (((int)(sensor) & 0x08) != 0)
-                label1.Text = "후진";
-
+ 
             if (isAutoMode)
             {
                 if (((int)(sensor) & 0x0400) != 0)
                 {
                     short value = 0x0002;
                     control.WriteDeviceBlock2("Y0", 1, ref value);
+                    label1.Text = "B 실린더 전진";
+                }
+                else if (((int)(sensor) & 0x0004) != 0)
+                {
+                    short value = 0x0004;
+                    control.WriteDeviceBlock2("Y0", 1, ref value);
+                    label1.Text = "B 실린더 후진";
                 }
                 else if (((int)(sensor) & 0x0800) != 0)
                 {
                     short value = 0x0008;
                     control.WriteDeviceBlock2("Y0", 1, ref value);
+                    label1.Text = "C 실린더 전진";
+                }
+                else if (((int)(sensor) & 0x0020) != 0)
+                {
+                    short value = 0x0010;
+                    control.WriteDeviceBlock2("Y0", 1, ref value);
+                    label1.Text = "C 실린더 후진";
                 }
             }
         }
