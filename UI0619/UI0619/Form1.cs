@@ -21,8 +21,6 @@ namespace UI0619
             InitializeComponent();
         }
 
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             // 연결
@@ -30,6 +28,7 @@ namespace UI0619
             {
                 MessageBox.Show("연결되었습니다.");
                 timer1.Enabled = true;
+                timer2.Enabled = true;
             }
             else
             {
@@ -47,6 +46,71 @@ namespace UI0619
         {
             // 자동운전 정지
             isAutoMode = false;
+        }
+
+        int num;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // B실린더 전진
+            short value = 0x01 << 1;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 1;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // B실린더 후진
+            short value = 0x01 << 2;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 2;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // C실린더 전진
+            short value = 0x01 << 3;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 3;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // C실린더 후진
+            short value = 0x01 << 4;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 4;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // 리프트A UP
+            short value = 0x01 << 5;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 5;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // 리프트A DOWN
+            short value = 0x01 << 6;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 6;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // 리프트B UP
+            short value = 0x01 << 8;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 7;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // 리프트B DOWN
+            short value = 0x01 << 7;
+            control.WriteDeviceBlock2("Y0", 1, ref value);
+            num = 8;
         }
 
         int autoStep;
@@ -162,68 +226,54 @@ namespace UI0619
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void timer2_Tick(object sender, EventArgs e)
         {
-            // B실린더 전진
-            short value = 0x01 << 1;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "B실린더 전진";
-        }
+            short sensor = 0;
+            control.ReadDeviceBlock2("X0", 1, out sensor);
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            // B실린더 후진
-            short value = 0x01 << 2;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "B실린더 후진";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            // C실린더 전진
-            short value = 0x01 << 3;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "C실린더 전진";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            // C실린더 후진
-            short value = 0x01 << 4;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "C실린더 후진";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            // 리프트A UP
-            short value = 0x01 << 5;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "리프트A UP";
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            // 리프트A DOWN
-            short value = 0x01 << 6;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "리프트A DOWN";
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            // 리프트B UP
-            short value = 0x01 << 8;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "리프트B UP";
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            // 리프트B DOWN
-            short value = 0x01 << 7;
-            control.WriteDeviceBlock2("Y0", 1, ref value);
-            label1.Text = "리프트B DOWN";
+            switch (num)
+            {
+                case 1:
+                    {
+                        label1.Text = "B 실린더 전진";
+                        break;
+                    }
+                case 2:
+                    {
+                        label1.Text = "B 실린더 후진";
+                        break;
+                    }
+                case 3:
+                    {
+                        label1.Text = "C 실린더 전진";
+                        break;
+                    }
+                case 4:
+                    {
+                        label1.Text = "C 실린더 후진";
+                        break;
+                    }
+                case 5:
+                    {
+                        label1.Text = "리프트 A UP";
+                        break;
+                    }
+                case 6:
+                    {
+                        label1.Text = "리프트 A DOWN";
+                        break;
+                    }
+                case 7:
+                    {
+                        label1.Text = "리프트 B UP";
+                        break;
+                    }
+                case 8:
+                    {
+                        label1.Text = "리프트 B DOWN";
+                        break;
+                    }
+            }
         }
     }
 }
