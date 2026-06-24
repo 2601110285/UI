@@ -21,6 +21,8 @@ namespace UI0619
             InitializeComponent();
         }
 
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 연결
@@ -126,7 +128,7 @@ namespace UI0619
                     label1.Text = "두 리프트 동시 하강 중...";
                     autoStep = 4;
                 }
-                // [4단계] [변경] 두 리프트 모두 바닥에 도착 확인 -> C실린더 전진
+                // [4단계] 두 리프트 모두 바닥에 도착 확인 -> C실린더 전진
                 else if (autoStep == 4 &&
                          ((int)(sensor) & 0x0080) != 0 && // 리프트A 바닥 도착
                          ((int)(sensor) & 0x0200) != 0)   // 리프트B 바닥 도착
